@@ -43,6 +43,7 @@ eventHub.addEventListener("click", e => {
     }
 })
 
+// 
 eventHub.addEventListener("click", e => {
     //if button that was clicked has an ID of "sideshowTicket" then..
     if(e.target.id === 'sideshowTicket') {
@@ -58,6 +59,19 @@ eventHub.addEventListener("click", e => {
     }
 })
 
+// Full Package Ticket
+eventHub.addEventListener("click", e => {
+    if(e.target.id === 'fullTicket') {
+        const fullTicketEvent = new CustomEvent("fullTicketPurchased", {
+            detail: {
+                fullTicketThatWasChosen: e.target.value
+            }
+        })
+        //Broadcast the custom event
+        eventHub.dispatchEvent(fullTicketEvent)
+    }
+})
+
 
 // Add buttons to the DOM with unique IDs to be used by the event listener
 export const TicketBooth = () => {
@@ -67,6 +81,7 @@ export const TicketBooth = () => {
             <button id="foodTicket">Food Ticket</button>
             <button id="gameTicket">Game Ticket</button>
             <button id="sideshowTicket">Sideshow Ticket</button>
+            <button id="fullTicket">Full Package Ticket</button>
         </div>
     `
 }
