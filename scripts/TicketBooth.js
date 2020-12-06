@@ -43,13 +43,30 @@ eventHub.addEventListener("click", e => {
     }
 })
 
+eventHub.addEventListener("click", e => {
+    //if button that was clicked has an ID of "sideshowTicket" then..
+    if(e.target.id === 'sideshowTicket') {
+        //Create CustomEvent of sideshowTicketPurchased
+        const sideshowEvent = new CustomEvent("sideshowTicketPurchased", {
+            detail: {
+                //gameThatWasChosen has the value of the selection
+                sideshowThatWasChosen: e.target.value
+            }
+        })
+        //Broadcast the custom event
+        eventHub.dispatchEvent(sideshowEvent)
+    }
+})
 
+
+// Add buttons to the DOM with unique IDs to be used by the event listener
 export const TicketBooth = () => {
     contentTarget.innerHTML = `
         <div class="ticketBooth">
             <button id="rideTicket">Ride Ticket</button>
             <button id="foodTicket">Food Ticket</button>
             <button id="gameTicket">Game Ticket</button>
+            <button id="sideshowTicket">Sideshow Ticket</button>
         </div>
     `
 }
